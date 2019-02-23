@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TmdbService } from 'src/app/services/tmdb.service';
 import { NotFoundError } from '../../errors/notfound-error';
 import { AppError } from '../../errors/app-error';
@@ -41,6 +41,10 @@ export class ShowsComponent implements OnInit {
           this.status.class = "alert-danger";
         }
       });
+  }
+
+  showDetails(id){
+    console.log(id);
   }
 
 }
