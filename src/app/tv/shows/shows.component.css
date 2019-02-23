@@ -1,0 +1,15 @@
+.card-show{
+    padding-left: 2px;
+    padding-right: 2px;
+}
+
+.card-body{
+    padding: 0.25rem;
+    font-weight: 600;
+    font-size: 0.5rem;
+}
+
+.card-img-top{
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
