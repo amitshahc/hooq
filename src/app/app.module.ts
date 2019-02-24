@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './theme/includes/header/header.component';
 import { FooterComponent } from './theme/includes/footer/footer.component';
 import { MasterComponent } from './theme/master/master.component';
+// import { SpinnerComponent } from './includes/spinner/spinner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    MasterComponent
+    MasterComponent,    
+    // SpinnerComponent
   ],
   imports: [
     BrowserModule,

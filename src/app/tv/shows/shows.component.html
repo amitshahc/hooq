@@ -1,35 +1,40 @@
-
+<include-spinner *ngIf="!isShowsResLoaded"></include-spinner>
 
 <tv-show *ngIf="isShowDetail" [showId]="showId" (clickedBack)="showsList()"></tv-show>
 
-<div class="row" *ngIf="!isShowDetail">  
-  
-  <div class="col-md-2 card-show" *ngFor="let show of shows">
-    <div class="card mb-2 shadow-sm">
-      <img class="card-img-top" data-src="{{urlImg}}{{show.poster_path}}" alt="{{show.name}}">
-      <div class="card-body" (click)="showDetails(show.id)">
-        <a href="javascript:void(0)">
-          {{show.name}}
-        </a>
-      </div>
-    </div>
-  </div>
+<ng-container *ngIf="!isShowDetail && isShowsResLoaded">
+  <div class="row">
 
-  <!-- <div class="col-md-4">
-    <div class="card mb-4 shadow-sm">
-      <img class="card-img-top" data-src="holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=Thumbnail" alt="Card image cap">
-      <div class="card-body">
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional
-          content. This content is a little bit longer.</p>
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-          </div>
-          <small class="text-muted">9 mins</small>
+    <div class="col-md-2 card-show" *ngFor="let show of shows">
+      <div class="card mb-2 shadow-sm">
+        <img class="card-img-top" data-src="{{urlImg}}{{show.poster_path}}" alt="{{show.name}}">
+        <div class="card-body" (click)="showDetails(show.id)">
+          <a href="javascript:void(0)">
+            {{show.name}}
+          </a>
         </div>
       </div>
     </div>
-  </div> -->
 
-</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" *ngIf="currentPage > 1">
+            <a class="page-link" href="javascript:void(0)" tabindex="-1" aria-disabled="false" (click)="setCurrentPage(currentPage - 1)">Previous</a>
+          </li>
+          <li class="page-item disabled" *ngIf="currentPage == 1">
+            <a class="page-link" href="javascript:void(0)" tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link">{{showsRes.page}}</a></li>
+          <li class="page-item">
+            <a class="page-link" href="javascript:void(0)" (click)="setCurrentPage(currentPage + 1)">Next</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</ng-container>
+

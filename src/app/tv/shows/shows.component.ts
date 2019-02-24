@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TmdbService } from 'src/app/services/tmdb.service';
 import { NotFoundError } from '../../errors/notfound-error';
 import { AppError } from '../../errors/app-error';
+//import { SpinnerComponent } from '../../includes/spinner.component';
 import * as GLOBAL from '../../globals';
 
 @Component({
@@ -13,27 +14,30 @@ export class ShowsComponent implements OnInit {
 
   // filter: string = '';
   shows = [];
-  showsInit: any;
+  showsRes: any;
   isShowDetail: boolean = false;
+  isShowsResLoaded: boolean = false;
+  isPageLoading: boolean = true;
   showId: number;
   status = { text: "Loading...", class: "alert-info" }
   urlImg: string;
-  page: number = 1;
+  currentPage: number = 1;
 
   constructor(private service: TmdbService) {
     this.urlImg = GLOBAL.urlImage;
   }
 
-  ngOnInit() {    
-    console.log(this.urlImg);
+  ngOnInit() {
     this._getShows();
   }
 
   private _getShows() {
-    this.service.getShowsList(this.page).subscribe(
+    this.service.getShowsList(this.currentPage).subscribe(
       res => {
-        this.showsInit = res;
-        this.shows = this.showsInit.results;
+        this.showsRes = res;
+        this.shows = this.showsRes.results;
+        this.isShowsResLoaded = true;
+        console.log('showsRes', this.showsRes);
         //this.showList = true;
       }, (error: AppError) => {
         if (error instanceof NotFoundError) {
@@ -47,19 +51,29 @@ export class ShowsComponent implements OnInit {
       });
   }
 
-  showDetails(id){
+  showDetails(id) {
     this.isShowDetail = true;
     this.showId = id;
     console.log(id);
   }
 
-  showsList(){
+  showsList() {
     this.isShowDetail = false;
     console.log('back to show list');
   }
 
-  ngOnDestroy(){
+  setCurrentPage(page: number) {    
+    this.currentPage = page;
+    this.isShowsResLoaded = false;
+    this._getShows();
+  }
+
+  ngOnDestroy() {
     console.log('destroy');
+  }
+
+  ngAfterViewInit(){
+    this.isPageLoading = false;
   }
 
 }

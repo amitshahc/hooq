@@ -12,14 +12,14 @@ import * as GLOBAL from '../../globals';
 
 export class ShowComponent implements OnInit {
 
-  @Input() showId: Number;
+  @Input() showId: number;
   @Output() clickedBack = new EventEmitter<boolean>();
   private btnBackClick: boolean = false;
   showDetails: any;
   private status = { text: "Loading...", class: "alert-info" };
   private urlImg : string;
   showDetailsLoaded: boolean = false;
-  private seasonNumber : Number = 1;
+  private seasonNumber : number = 1;
 
   constructor(private service: TmdbService) { 
     this.urlImg = GLOBAL.urlImage;
@@ -66,7 +66,7 @@ export class ShowComponent implements OnInit {
     this.showDetails.totalEpisodes = episodes;
   }
 
-  public showEpisodes(seasonNumber: Number){
+  public showEpisodes(seasonNumber: number){
     this.seasonNumber = seasonNumber;
     console.log(this.seasonNumber);
   }

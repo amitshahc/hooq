@@ -11,8 +11,8 @@ import * as GLOBAL from '../../globals';
 })
 export class EpisodesComponent implements OnInit {
 
-  @Input('seasonNumber') season: Number;
-  @Input('showId') showId: Number;
+  @Input('seasonNumber') season: number;
+  @Input('showId') showId: number;
   private objEpisodes: any;
   episodes: Array<any>;
   private episodesLoaded: boolean = false;
