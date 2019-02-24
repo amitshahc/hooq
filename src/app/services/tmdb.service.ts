@@ -25,7 +25,7 @@ export class TmdbService extends TvShows {
     return super.get(url);
   }
 
-  getShowDetails(id: number) {
+  getShowDetails(id: Number) {
     let url = this.urlShowDetails + '/' + id + this.paramApiKey + '&language=en-US';
     return super.get(url);
   }

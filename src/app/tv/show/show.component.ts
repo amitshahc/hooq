@@ -18,7 +18,7 @@ export class ShowComponent implements OnInit {
   private showDetails: any;
   private status = { text: "Loading...", class: "alert-info" };
   private urlImg : string;
-  private showDetailsLoaded: boolean = false;
+  showDetailsLoaded: boolean = false;
   private seasonNumber : Number = 1;
 
   constructor(private service: TmdbService) { 

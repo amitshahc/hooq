@@ -11,25 +11,27 @@ import * as GLOBAL from '../../globals';
 })
 export class EpisodesComponent implements OnInit {
 
-  @Input('seasonNumber') season: number;
-  @Input('showId') showId: number;
-  private episodes: any;
-  private episodesLoaded : boolean = false;
+  @Input('seasonNumber') season: Number;
+  @Input('showId') showId: Number;
+  private objEpisodes: any;
+  episodes: Array<any>;
+  private episodesLoaded: boolean = false;
   private status = { text: "Loading...", class: "alert-info" };
 
   constructor(private service: TmdbService) { }
 
-  ngOnChanges(){
+  ngOnChanges() {
     this._getShowDetails();
   }
 
   ngOnInit() {
   }
 
-  private _getShowDetails() {    
+  private _getShowDetails() {
     this.service.getEpisodes(this.showId, this.season).subscribe(
-      res => {
-        this.episodes = res.episodes;        
+      res => {        
+        this.objEpisodes = res;
+        this.episodes = this.objEpisodes.episodes;
         this.episodesLoaded = true;
         console.log(res);
       }, (error: AppError) => {
