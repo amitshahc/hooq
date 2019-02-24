@@ -12,20 +12,20 @@ import * as GLOBAL from '../../globals';
 
 export class ShowComponent implements OnInit {
 
-  @Input() showId: number;
+  @Input() showId: Number;
   @Output() clickedBack = new EventEmitter<boolean>();
   private btnBackClick: boolean = false;
   private showDetails: any;
   private status = { text: "Loading...", class: "alert-info" };
   private urlImg : string;
   private showDetailsLoaded: boolean = false;
+  private seasonNumber : Number = 1;
 
   constructor(private service: TmdbService) { 
     this.urlImg = GLOBAL.urlImage;
   }
 
-  ngOnChanges(){
-    console.log('onchange', this.showId);
+  ngOnChanges(){    
     this.showDetailsLoaded = false;
     this.showDetails = null;
     this._getShowDetails();
@@ -35,8 +35,7 @@ export class ShowComponent implements OnInit {
     //this._getShowDetails();
   }
 
-  private _getShowDetails() {
-    console.log('getshowdetails',this.showId);
+  private _getShowDetails() {    
     this.service.getShowDetails(this.showId).subscribe(
       res => {
         this.showDetails = res;
@@ -67,5 +66,9 @@ export class ShowComponent implements OnInit {
     this.showDetails.totalEpisodes = episodes;
   }
 
+  public showEpisodes(seasonNumber: Number){
+    this.seasonNumber = seasonNumber;
+    console.log(this.seasonNumber);
+  }
 
 }

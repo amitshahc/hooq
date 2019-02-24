@@ -22,11 +22,17 @@ export class TmdbService extends TvShows {
 
   getShowsList(page: Number) {
     let url = this.urlDiscover + this.paramApiKey + '&page=' + page + '&language=en-US&sort_by=popularity.desc&timezone=America%2FNew_York&include_null_first_air_dates=false';
-    return super.getShows(url);
+    return super.get(url);
   }
 
   getShowDetails(id: number) {
     let url = this.urlShowDetails + '/' + id + this.paramApiKey + '&language=en-US';
-    return super.getDetails(id, url);
+    return super.get(url);
   }
+
+  getEpisodes(tvId: Number, season: Number) {
+    let url = this.urlShowDetails + '/' + tvId + '/season/' + season + this.paramApiKey + '&language=en-US';
+    return super.get(url);
+  }
+  
 }

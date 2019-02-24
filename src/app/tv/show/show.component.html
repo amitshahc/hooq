@@ -25,8 +25,15 @@
     <h2>{{showDetails.name}}</h2>
     <h6 class="text-success"> 
         {{showDetails.number_of_episodes}} episodes,
-        {{showDetails.number_of_seasons}} seasons,        
+        {{showDetails.number_of_seasons}} seasons
     </h6>
+    <h4>EPISODES</h4>
+    <h5>Seasons:
+        <span *ngFor="let season of showDetails.seasons | slice:1" class="mx-1">
+            <a href="javascript:void(0)" (click)="showEpisodes(season.season_number)">{{season.season_number}}</a>
+        </span>
+    </h5>
+    <tv-episodes [showId]="showId" [seasonNumber]="seasonNumber"></tv-episodes>
   </div>
 </div>
 

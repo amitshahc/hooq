@@ -19,19 +19,20 @@ export class TvShows {
     this.http = http;    
   }
 
-  getShows(url : string){
+  get(url : string){
     return this.http.get(url).pipe(
       map(response => { return response;}),
       catchError( error => this.handleError(error))
     )
   }
 
-  getDetails(id : number, url: string){
-    return this.http.get(url).pipe(
-      map(response => { return response;}),
-      catchError( error => this.handleError(error))
-    )
-  }
+  // getDetails(url: string){
+  //   return this.http.get(url).pipe(
+  //     map(response => { return response;}),
+  //     catchError( error => this.handleError(error))
+  //   )
+  // }
+
 
   private handleError(error: any) {    
     //console.log("handleError: ", error);
