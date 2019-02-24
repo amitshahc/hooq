@@ -15,7 +15,7 @@ export class ShowComponent implements OnInit {
   @Input() showId: Number;
   @Output() clickedBack = new EventEmitter<boolean>();
   private btnBackClick: boolean = false;
-  private showDetails: any;
+  showDetails: any;
   private status = { text: "Loading...", class: "alert-info" };
   private urlImg : string;
   showDetailsLoaded: boolean = false;
@@ -41,7 +41,7 @@ export class ShowComponent implements OnInit {
         this.showDetails = res;
         this._setTotalEpisodes();
         this.showDetailsLoaded = true;
-        console.log(res);
+        console.log('this.showDetails', this.showDetails);
       }, (error: AppError) => {
         if (error instanceof NotFoundError) {
           this.status.text = "Resource not found.";

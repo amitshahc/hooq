@@ -29,9 +29,16 @@
     </h6>
     <h4>EPISODES</h4>
     <h5>Seasons:
-        <span *ngFor="let season of showDetails.seasons | slice:1" class="mx-1">
-            <a href="javascript:void(0)" (click)="showEpisodes(season.season_number)">{{season.season_number}}</a>
+        <ng-container *ngFor="let season of showDetails.seasons">
+        <span  class="mx-1 episode-number" *ngIf="season.season_number !== 0">
+            <!-- <a *ngIf="season.season_number === seasonNumber">{{season.season_number}}</a> -->
+
+            <a [ngClass]="{'active disabled': season.season_number === seasonNumber}"  href="javascript:void(0)" 
+                (click)="showEpisodes(season.season_number)">
+                {{season.season_number}}
+            </a>
         </span>
+        </ng-container>
     </h5>
     <tv-episodes [showId]="showId" [seasonNumber]="seasonNumber"></tv-episodes>
   </div>

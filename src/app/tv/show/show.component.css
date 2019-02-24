@@ -5,3 +5,7 @@ li:last-child:after
 {
   content: '';
 }
+
+.episode-number a.active{
+    font-weight: bold;
+}
