@@ -9,17 +9,25 @@ import * as GLOBAL from '../globals';
 
 export class TmdbService extends TvShows {
 
-  urlDiscover: string = "https://api.themoviedb.org/3/discover/tv?";
+  private url: string = "https://api.themoviedb.org/3/";
+  private paramApiKey: string;
+  private urlDiscover: string = this.url + 'discover/tv';
+  private urlShowDetails: string = this.url + 'tv';
 
   constructor(http: HttpClient) {
     super(http);
-    this.urlDiscover += 'api_key=' + GLOBAL.TMDB_API_KEY;
-    this.urlDiscover += '&language=en-US&sort_by=popularity.desc&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false';
+    this.paramApiKey = '?api_key=' + GLOBAL.TMDB_API_KEY;    
     this.getShows();
   }
 
   getShows() {
+    this.urlDiscover +=  this.paramApiKey + '&language=en-US&sort_by=popularity.desc&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false';
     return super.getShows(this.urlDiscover);
+  }
+
+  getShowDetails(id: number) {
+    this.urlShowDetails +=  '/' + id + this.paramApiKey + '&language=en-US';
+    return super.getDetails(id, this.urlShowDetails);
   }
   // getAll() {
   //   return super.getAll("http://demo1601932.mockable.io/customers/get");

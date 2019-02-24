@@ -1,5 +1,9 @@
-<div class="row">
 
+
+<tv-show *ngIf="isShowDetail" [showId]="showId" (clickedBack)="showsList()"></tv-show>
+
+<div class="row" *ngIf="!isShowDetail">  
+  
   <div class="col-md-2 card-show" *ngFor="let show of shows">
     <div class="card mb-2 shadow-sm">
       <img class="card-img-top" data-src="{{urlImg}}{{show.poster_path}}" alt="{{show.name}}">
@@ -29,5 +33,3 @@
   </div> -->
 
 </div>
-
-<tv-show></tv-show>

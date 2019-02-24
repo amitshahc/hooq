@@ -13,7 +13,8 @@ export class ShowsComponent implements OnInit {
   // filter: string = '';
   shows = [];
   showsInit: any;
-  // showList: boolean = false;
+  isShowDetail: boolean = false;
+  showId: number;
   status = { text: "Loading...", class: "alert-info" }
   urlImg: string;
 
@@ -44,7 +45,18 @@ export class ShowsComponent implements OnInit {
   }
 
   showDetails(id){
+    this.isShowDetail = true;
+    this.showId = id;
     console.log(id);
+  }
+
+  showsList(){
+    this.isShowDetail = false;
+    console.log('back to show list');
+  }
+
+  ngOnDestroy(){
+    console.log('destroy');
   }
 
 }

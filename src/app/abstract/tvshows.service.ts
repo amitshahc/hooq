@@ -26,6 +26,13 @@ export class TvShows {
     )
   }
 
+  getDetails(id : number, url: string){
+    return this.http.get(url).pipe(
+      map(response => { return response;}),
+      catchError( error => this.handleError(error))
+    )
+  }
+
   // getAll(url? : string){
     
   //   url = url ? url : this.url;
