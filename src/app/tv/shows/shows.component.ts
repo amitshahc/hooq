@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TmdbService } from 'src/app/services/tmdb.service';
 import { NotFoundError } from '../../errors/notfound-error';
 import { AppError } from '../../errors/app-error';
+import * as GLOBAL from '../../globals';
 
 @Component({
   selector: 'tv-shows',
@@ -17,17 +18,19 @@ export class ShowsComponent implements OnInit {
   showId: number;
   status = { text: "Loading...", class: "alert-info" }
   urlImg: string;
+  page: number = 1
 
   constructor(private service: TmdbService) {
-    this.urlImg = "https://image.tmdb.org/t/p/w185_and_h278_bestv2/";
+    this.urlImg = GLOBAL.urlImage;
   }
 
-  ngOnInit() {
+  ngOnInit() {    
+    console.log(this.urlImg);
     this._getShows();
   }
 
   private _getShows() {
-    this.service.getShows().subscribe(
+    this.service.getShowsList(this.page).subscribe(
       res => {
         this.showsInit = res;
         this.shows = this.showsInit.results;

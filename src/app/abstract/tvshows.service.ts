@@ -33,49 +33,6 @@ export class TvShows {
     )
   }
 
-  // getAll(url? : string){
-    
-  //   url = url ? url : this.url;
-    
-  //   return this.http.get(url).pipe(
-  //     map(response => { return response;}),
-  //     catchError( error => this.handleError(error))
-  //   )
-  // }
-
-  // getUser(uid, url? : string){
-  //   url = url ? url : this.url;
-
-  //   return this.http.get(url + "/" + uid)
-  //   .pipe(
-  //     retry(2),
-  //     catchError( error => this.handleError(error))
-  //   )
-  // }
-
-  // create(user, url? : string){  
-  //   url = url ? url : this.url;
-    
-  //   return this.http.put(url, user).pipe(
-  //     map(response => { return response;}),
-  //     catchError( error => this.handleError(error))
-  //   )
-  // }
-
-  // update(uid, data, url? : string){
-  //   url = url ? url : this.url;
-
-  //   return this.http.patch(url + '/'+ uid, data, { observe: "response"}).pipe(
-  //     map(response => {
-  //       // console.log('Headers', response.headers.keys());
-  //       // console.log('Body', response.body);
-  //       return response.body;
-  //     }),
-  //     retry(1),
-  //     catchError( error => this.handleError(error))
-  //   )
-  // }
-
   private handleError(error: any) {    
     //console.log("handleError: ", error);
     if (error.status as number === GLOBAL.USER_NOT_FOUND) {      

@@ -16,41 +16,17 @@ export class TmdbService extends TvShows {
 
   constructor(http: HttpClient) {
     super(http);
-    this.paramApiKey = '?api_key=' + GLOBAL.TMDB_API_KEY;    
-    this.getShows();
+    this.paramApiKey = '?api_key=' + GLOBAL.TMDB_API_KEY;
+    //this.getShows();
   }
 
-  getShows() {
-    this.urlDiscover +=  this.paramApiKey + '&language=en-US&sort_by=popularity.desc&page=1&timezone=America%2FNew_York&include_null_first_air_dates=false';
-    return super.getShows(this.urlDiscover);
+  getShowsList(page: Number) {
+    let url = this.urlDiscover + this.paramApiKey + '&page=' + page + '&language=en-US&sort_by=popularity.desc&timezone=America%2FNew_York&include_null_first_air_dates=false';
+    return super.getShows(url);
   }
 
   getShowDetails(id: number) {
-    this.urlShowDetails +=  '/' + id + this.paramApiKey + '&language=en-US';
-    return super.getDetails(id, this.urlShowDetails);
+    let url = this.urlShowDetails + '/' + id + this.paramApiKey + '&language=en-US';
+    return super.getDetails(id, url);
   }
-  // getAll() {
-  //   return super.getAll("http://demo1601932.mockable.io/customers/get");
-  // }
-
-  // get(uid) {
-  //   return super.getUser(uid, "http://demo1601932.mockable.io/customer/get");
-  // }
-
-  // create(user) {
-  //   return super.create(user, "http://demo1601932.mockable.io/customers");
-  // }
-
-  // update(uid, userData) {
-  //   return super.update(uid, userData, "http://demo1601932.mockable.io/customers");
-  // }
-
-  // //Admin
-  // getall4Admin() {
-  //   return super.getAll("https://jsonplaceholder.typicode.com/users");
-  // }
-
-  // get4Admin(uid) {
-  //   return super.getUser(uid, "https://jsonplaceholder.typicode.com/users");
-  // }
 }

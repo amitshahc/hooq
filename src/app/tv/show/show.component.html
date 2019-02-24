@@ -1,3 +1,9 @@
-show
+<div class="row" *ngIf="showDetailsLoaded">
+    <div class="col-md-4">
+        <img class="card-img-top" data-src="{{urlImg}}{{showDetails.poster_path}}" alt="{{showDetails.name}}">
+    </div>
+    <div class="col-md-8"></div>
+</div>
 
-<button (click)="backtoShows()"></button>
+<div *ngIf="!showDetailsLoaded">{{status.text}}</div>
+<button (click)="backtoShows()" class="btn btn-info">Back</button>
