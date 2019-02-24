@@ -40,6 +40,7 @@ export class ShowComponent implements OnInit {
     this.service.getShowDetails(this.showId).subscribe(
       res => {
         this.showDetails = res;
+        this._setTotalEpisodes();
         this.showDetailsLoaded = true;
         console.log(res);
       }, (error: AppError) => {
@@ -59,4 +60,12 @@ export class ShowComponent implements OnInit {
     this.btnBackClick = true;
     this.clickedBack.emit(this.btnBackClick);
   }
+
+  private _setTotalEpisodes(){
+    let seasons = this.showDetails.seasons;
+    let episodes = seasons.reduce((total, current, index, src) => total + current.episode_count, 0);
+    this.showDetails.totalEpisodes = episodes;
+  }
+
+
 }

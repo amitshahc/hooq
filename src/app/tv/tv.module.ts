@@ -6,10 +6,11 @@ import { TvRoutingModule } from './tv-routing.module';
 import { ShowsComponent } from './shows/shows.component';
 import { TmdbService } from '../services/tmdb.service';
 import { ShowComponent } from './show/show.component';
+import { EpisodesComponent } from './episodes/episodes.component';
 
 
 @NgModule({
-  declarations: [ShowsComponent, ShowComponent],
+  declarations: [ShowsComponent, ShowComponent, EpisodesComponent],
   imports: [
     CommonModule,
     TvRoutingModule,

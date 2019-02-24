@@ -18,7 +18,7 @@ export class ShowsComponent implements OnInit {
   showId: number;
   status = { text: "Loading...", class: "alert-info" }
   urlImg: string;
-  page: number = 1
+  page: number = 1;
 
   constructor(private service: TmdbService) {
     this.urlImg = GLOBAL.urlImage;
