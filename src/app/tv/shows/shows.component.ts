@@ -4,6 +4,8 @@ import { NotFoundError } from '../../errors/notfound-error';
 import { AppError } from '../../errors/app-error';
 //import { SpinnerComponent } from '../../includes/spinner.component';
 import * as GLOBAL from '../../globals';
+import { isError } from 'util';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'tv-shows',
@@ -16,12 +18,12 @@ export class ShowsComponent implements OnInit {
   shows = [];
   showsRes: any;
   isShowDetail: boolean = false;
-  isShowsResLoaded: boolean = false;
-  isPageLoading: boolean = true;
+  isLoading: boolean = true;
   showId: number;
   status = { text: "Loading...", class: "alert-info" }
   urlImg: string;
   currentPage: number = 1;
+  isError: boolean = false;
 
   constructor(private service: TmdbService) {
     this.urlImg = GLOBAL.urlImage;
@@ -33,12 +35,12 @@ export class ShowsComponent implements OnInit {
 
   private _getShows() {
     this.service.getShowsList(this.currentPage).subscribe(
-      res => {
+      (res: any) => {
         this.showsRes = res;
-        this.shows = this.showsRes.results;
-        this.isShowsResLoaded = true;
         console.log('showsRes', this.showsRes);
-        //this.showList = true;
+        this.shows = this.showsRes.results;
+        this.showError(false);
+        this.showSpinner(false);
       }, (error: AppError) => {
         if (error instanceof NotFoundError) {
           this.status.text = "Resource not found.";
@@ -47,8 +49,21 @@ export class ShowsComponent implements OnInit {
         else {
           this.status.text = "Application error occured.";
           this.status.class = "alert-danger";
+          this.showError(true);
+          this.showSpinner(false);
         }
       });
+  }
+
+  showSpinner(show: boolean) {
+    this.isLoading = show;
+  }
+
+  showError(show: boolean, error?) {
+    console.log(show);
+    this.isError = show;
+    if (error)
+      this.status = { text: error, class: "alert-danger" };
   }
 
   showDetails(id) {
@@ -62,9 +77,10 @@ export class ShowsComponent implements OnInit {
     console.log('back to show list');
   }
 
-  setCurrentPage(page: number) {    
+  setCurrentPage(page: number) {
+    console.log(page);
     this.currentPage = page;
-    this.isShowsResLoaded = false;
+    this.showSpinner(true);
     this._getShows();
   }
 
@@ -72,8 +88,8 @@ export class ShowsComponent implements OnInit {
     console.log('destroy');
   }
 
-  ngAfterViewInit(){
-    this.isPageLoading = false;
+  ngAfterViewInit() {
+    //this.isPageLoading = false;
   }
 
 }

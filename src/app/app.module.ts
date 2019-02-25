@@ -13,7 +13,7 @@ import { MasterComponent } from './theme/master/master.component';
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    MasterComponent,    
+    MasterComponent,
     // SpinnerComponent
   ],
   imports: [

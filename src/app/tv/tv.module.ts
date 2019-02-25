@@ -8,10 +8,11 @@ import { TmdbService } from '../services/tmdb.service';
 import { ShowComponent } from './show/show.component';
 import { EpisodesComponent } from './episodes/episodes.component';
 import { SpinnerComponent } from '../includes/spinner/spinner.component';
+import { AlertErrorComponent } from '../includes/alert-error/alert-error.component';
 
 
 @NgModule({
-  declarations: [ShowsComponent, ShowComponent, EpisodesComponent, SpinnerComponent],
+  declarations: [ShowsComponent, ShowComponent, EpisodesComponent, SpinnerComponent, AlertErrorComponent],
   imports: [
     CommonModule,
     TvRoutingModule,
