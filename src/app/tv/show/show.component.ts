@@ -55,7 +55,7 @@ export class ShowComponent implements OnInit {
   }
 
   backtoShows() {
-    console.log('back');
+    // console.log('back');
     this.btnBackClick = true;
     this.clickedBack.emit(this.btnBackClick);
   }
@@ -68,7 +68,10 @@ export class ShowComponent implements OnInit {
 
   public showEpisodes(seasonNumber: number){
     this.seasonNumber = seasonNumber;
-    console.log(this.seasonNumber);
+    // console.log(this.seasonNumber);
   }
 
+  ngAfterViewInit() {  
+    //document.getElementById('top-section').style.display = 'none';
+  }
 }

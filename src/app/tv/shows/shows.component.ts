@@ -6,6 +6,7 @@ import { AppError } from '../../errors/app-error';
 import * as GLOBAL from '../../globals';
 import { isError } from 'util';
 import { throwError } from 'rxjs';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'tv-shows',
@@ -15,6 +16,7 @@ import { throwError } from 'rxjs';
 export class ShowsComponent implements OnInit {
 
   // filter: string = '';
+  //@Output() clickedDetails = new EventEmitter<boolean>();
   shows = [];
   showsRes: any;
   isShowDetail: boolean = false;
@@ -37,7 +39,7 @@ export class ShowsComponent implements OnInit {
     this.service.getShowsList(this.currentPage).subscribe(
       (res: any) => {
         this.showsRes = res;
-        console.log('showsRes', this.showsRes);
+        //console.log('showsRes', this.showsRes);
         this.shows = this.showsRes.results;
         this.showError(false);
         this.showSpinner(false);
@@ -60,7 +62,6 @@ export class ShowsComponent implements OnInit {
   }
 
   showError(show: boolean, error?) {
-    console.log(show);
     this.isError = show;
     if (error)
       this.status = { text: error, class: "alert-danger" };
@@ -69,27 +70,24 @@ export class ShowsComponent implements OnInit {
   showDetails(id) {
     this.isShowDetail = true;
     this.showId = id;
-    console.log(id);
   }
 
   showsList() {
     this.isShowDetail = false;
-    console.log('back to show list');
   }
 
   setCurrentPage(page: number) {
-    console.log(page);
     this.currentPage = page;
     this.showSpinner(true);
     this._getShows();
   }
 
   ngOnDestroy() {
-    console.log('destroy');
+    //console.log('destroy');
   }
 
-  ngAfterViewInit() {
-    //this.isPageLoading = false;
+  ngAfterViewChecked() {    
+    document.getElementById('top-section').style.display = this.isShowDetail ? 'none' : '';
   }
 
 }

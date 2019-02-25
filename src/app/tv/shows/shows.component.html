@@ -6,19 +6,19 @@
   <includes-alert-error [status]="status" *ngIf="isError"></includes-alert-error>
   <div class="row">
     <ng-container *ngIf="!isError">
-    <div class="col-md-2 card-show" *ngFor="let show of shows">
-      <div class="card mb-2 shadow-sm">
-        <img class="card-img-top" data-src="{{urlImg}}{{show.poster_path}}" alt="{{show.name}}">
-        <div class="card-body" (click)="showDetails(show.id)">
-          <a href="javascript:void(0)">
-            {{show.name}}
-          </a>
+      <div class="col-md-2 card-show" *ngFor="let show of shows">
+        <div class="card mb-2 shadow-sm">
+          <img class="card-img-top" data-src="{{urlImg}}{{show.poster_path}}" alt="{{show.name}}">
+          <div class="card-body" (click)="showDetails(show.id)">
+            <a href="javascript:void(0)">
+              {{show.name}}
+            </a>
+          </div>
         </div>
       </div>
-    </div>
     </ng-container>
 
-  </div>  
+  </div>
 </ng-container>
 
 <ng-container *ngIf="!isShowDetail">
