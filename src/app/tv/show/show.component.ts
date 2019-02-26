@@ -41,7 +41,7 @@ export class ShowComponent implements OnInit {
         this.showDetails = res;
         this._setTotalEpisodes();
         this.showDetailsLoaded = true;
-        console.log('this.showDetails', this.showDetails);
+        //console.log('this.showDetails', this.showDetails);
       }, (error: AppError) => {
         if (error instanceof NotFoundError) {
           this.status.text = "Resource not found.";

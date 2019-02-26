@@ -17,3 +17,8 @@
 #list-container{
     min-height: 500px;
 }
+
+.div-alert{
+    width: 100%;
+    text-align: center;
+}

@@ -2,10 +2,25 @@
 
 <tv-show *ngIf="isShowDetail" [showId]="showId" (clickedBack)="showsList()"></tv-show>
 
+<form class="row" *ngIf="!isShowDetail" onSubmit="return false;">
+  <div class="col-md-12 my-1">
+    <div class="float-right">
+      <input type="text" class="form-inline-control mx-2" #search>
+      <button type="submit" class="btn btn-sm btn-dark" (click)="searchTv(search.value)">Search</button>
+      <input type="reset" value="Clear" class="btn btn-sm btn-danger ml-1" (click)="searchTv()">
+    </div>
+  </div>
+</form>
+
 <ng-container *ngIf="!isShowDetail && !isLoading" id="list-container">
   <includes-alert-error [status]="status" *ngIf="isError"></includes-alert-error>
   <div class="row">
     <ng-container *ngIf="!isError">
+      
+      <div *ngIf="shows.length < 1" class="div-alert my-2">
+        <div class="alert alert-danger">No Result Found</div>
+      </div>
+
       <div class="col-md-2 card-show" *ngFor="let show of shows">
         <div class="card mb-2 shadow-sm">
           <img class="card-img-top" data-src="{{urlImg}}{{show.poster_path}}" alt="{{show.name}}">

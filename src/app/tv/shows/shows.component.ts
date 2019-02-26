@@ -26,6 +26,7 @@ export class ShowsComponent implements OnInit {
   urlImg: string;
   currentPage: number = 1;
   isError: boolean = false;
+  query : string = null;
 
   constructor(private service: TmdbService) {
     this.urlImg = GLOBAL.urlImage;
@@ -35,8 +36,11 @@ export class ShowsComponent implements OnInit {
     this._getShows();
   }
 
-  private _getShows() {
-    this.service.getShowsList(this.currentPage).subscribe(
+  private _getShows(query?: string) {
+    
+    this.showSpinner(true);
+    
+    this.service.getShowsList(this.currentPage, query).subscribe(
       (res: any) => {
         this.showsRes = res;
         //console.log('showsRes', this.showsRes);
@@ -76,17 +80,23 @@ export class ShowsComponent implements OnInit {
     this.isShowDetail = false;
   }
 
-  setCurrentPage(page: number) {
+  setCurrentPage(page: number, query?: string) {
     this.currentPage = page;
-    this.showSpinner(true);
-    this._getShows();
+    //this.showSpinner(true);
+    this._getShows(this.query ? this.query : null);
+  }
+
+  searchTv(query?: string) {
+    this.query = query || null;
+    this.setCurrentPage(1);    
+    this._getShows(this.query);
   }
 
   ngOnDestroy() {
     //console.log('destroy');
   }
 
-  ngAfterViewChecked() {    
+  ngAfterViewChecked() {
     document.getElementById('top-section').style.display = this.isShowDetail ? 'none' : '';
   }
 

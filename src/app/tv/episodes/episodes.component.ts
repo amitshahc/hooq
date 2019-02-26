@@ -33,7 +33,7 @@ export class EpisodesComponent implements OnInit {
         this.objEpisodes = res;
         this.episodes = this.objEpisodes.episodes;
         this.episodesLoaded = true;
-        console.log(res);
+        //console.log(res);
       }, (error: AppError) => {
         if (error instanceof NotFoundError) {
           this.status.text = "Resource not found.";
